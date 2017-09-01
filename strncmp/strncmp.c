@@ -4,6 +4,7 @@
  */
 
 #include <stdio.h>
+#include <string.h>
 
 /* This function should work similarly to the library 
  * function `strncmp()`. We will call it strncmp_a in order
@@ -41,21 +42,25 @@ int main ()
 	char str1[] = "Okay!";
 	char str2[] = "Use\0";
 	printf("Use case 1 return value: %d\n", strncmp_a(str1, str2, 0));
+	printf("Use case 1 return value: %d\n", strncmp(str1, str2, 0));
 
 	/* USE CASE 2 */
 	char str3[] = "Nice";
 	char str4[] = "COOL";
 	printf("Use case 2 return value: %d\n", strncmp_a(str3, str4, 4));
+	printf("Use case 2 return value: %d\n", strncmp(str3, str4, 4));
 
 	/* USE CASE 3 */
 	char str5[] = "Hell";
 	char str6[] = "Hello";
-	printf("Use case 3 return value: %d\n", strncmp_a(str5, str6, 5)); /* wait, why does this happen? */
+	printf("Use case 3 return value: %d\n", strncmp_a(str5, str6, 5));
+	printf("Use case 3 return value: %d\n", strncmp_a(str5, str6, 5));
 
 	/* USE CASE 4 */
 	char str7[] = "ha";
 	char str8[] = "ah";
 	printf("Use case 4 return value: %d\n", strncmp_a(str7, str8, 2));
+	printf("Use case 4 return value: %d\n", strncmp(str7, str8, 2));
 
 	return 0;
 }
