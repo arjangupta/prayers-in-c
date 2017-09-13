@@ -46,7 +46,7 @@ void merge (int *arrL, int lenL, int *arrR, int lenR)
 	}
 
 	/*arrL = buffArr;
-	 This line of code didn't work, most probably because 
+	 The above line of code didn't work, most probably because 
 	 buffArr goes out of scope at the end of this function and
 	 the fact that the pointer arrL was passed in by copy.*/
 
