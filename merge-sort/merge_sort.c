@@ -7,7 +7,7 @@
 
 void merge (int *arrL, int lenL, int *arrR, int lenR)
 {
-	for (size_t i = 0; i < lenL; ++i)
+	/*for (size_t i = 0; i < lenL; ++i)
 	{
 		printf("%d ", arrL[i]);
 	}
@@ -19,7 +19,7 @@ void merge (int *arrL, int lenL, int *arrR, int lenR)
 		printf("%d ", arrR[i]);
 	}
 
-	printf("\n");
+	printf("\n");*/
 
 	int buffArr[lenL + lenR];
 	size_t j = 0; 
@@ -54,11 +54,8 @@ void merge (int *arrL, int lenL, int *arrR, int lenR)
 	{
 		/* the next line of code actually 
 		changes the memory being pointed to */
-		arrL[i] = buffArr[i]; 
-		printf("%d ", arrL[i]);
+		arrL[i] = buffArr[i];
 	}
-
-	printf("\n");
 }
 
 void divide (int* arr, int len)
@@ -84,16 +81,15 @@ void divide (int* arr, int len)
 
 void mergeSort (int* arr, int len)
 {
-	/*divide(arr, len);*/
-	merge(arr, len/2, &arr[len/2], (len - len/2));
+	divide(arr, len);
 }
 
 int main()
 {
 	/*printf("%d", 5/2);*/
 
-	int arr[] = {1, 2, 3, 1, 2, 3};
-	/*int arr[] = {1, 2, 3, 4, 8, 6, 10, 9, 7, 5};*/
+	/*int arr[] = {1, 2, 3, 1, 2, 3};*/
+	int arr[] = {1, 2, 3, 4, 8, 6, 10, 9, 7, 5};
 	/*int arr[] = {8, 6, 34, 23, 4, 3};*/
 	int numelems = (int)( sizeof(arr) / sizeof(arr[0]) );
 	/*printf("%d", numelems);*/
