@@ -94,30 +94,42 @@ int main()
 	int numelems = (int)( sizeof(arr) / sizeof(arr[0]) );
 	/*printf("%d", numelems);*/
 
-	/* call merge sort on arr */
-	mergeSort(arr, numelems);
-
-	/* check if arr is sorted */
-	for (size_t i = 0; i < (numelems - 1); ++i)
-	{
-		if (arr[i] > arr[i + 1])
-		{
-			printf("Array is unsorted\n");
-			break;
-		}
-
-		if (i == (numelems - 2) )
-		{
-			printf("Array is sorted\n");
-		}
-	}
-
+	/* show the user the initial list */
+	printf("\nInitial list: ");
 	for (size_t i = 0; i < numelems; ++i)
 	{
 		printf("%d ", arr[i]);
 	}
 
 	printf("\n");
+
+	/* call merge sort on arr */
+	mergeSort(arr, numelems);
+
+	/* check if arr is sorted */
+	printf("\n");
+	for (size_t i = 0; i < (numelems - 1); ++i)
+	{
+		if (arr[i] > arr[i + 1])
+		{
+			printf("Array is unsorted.\n");
+			break;
+		}
+
+		if (i == (numelems - 2) )
+		{
+			printf("Array is sorted.\n");
+		}
+	}
+
+	/* show the user the resultant list */
+	printf("\nFinal list: ");
+	for (size_t i = 0; i < numelems; ++i)
+	{
+		printf("%d ", arr[i]);
+	}
+
+	printf("\n\n");
 	
 	return 0;
 }
