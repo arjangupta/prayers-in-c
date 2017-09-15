@@ -4,6 +4,7 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 
 void merge (int *arrL, int lenL, int *arrR, int lenR)
 {
@@ -58,30 +59,30 @@ void merge (int *arrL, int lenL, int *arrR, int lenR)
 	}
 }
 
-void divide (int* arr, int len)
+void divide (int** arrPtr, int len)
 {
-
-	/*for (size_t i = 0; i < len; ++i)
+	for (size_t i = 0; i < len; ++i)
 	{
-		printf("%d ", arr[i]);
+		printf("%d ", *(*arrPtr + i));
 	}
 
-	printf("\n");*/
+	printf("\n");
 
 	if (len == 1)
 	{
 		return;
 	}
 
-	divide(&arr[len/2], (len - len/2));
-	divide(arr, len/2);
+	int* leftArr = *arrPtr + len/2;
+	divide(&leftArr, (len - len/2));
+	divide(arrPtr, len/2);
 
-	merge(arr, len/2, &arr[len/2], (len - len/2));
+	/*merge(arr, len/2, &arr[len/2], (len - len/2));*/
 }
 
-void mergeSort (int* arr, int len)
+void mergeSort (int** arrPtr, int len)
 {
-	divide(arr, len);
+	divide(arrPtr, len);
 }
 
 int main()
@@ -89,22 +90,37 @@ int main()
 	/*printf("%d", 5/2);*/
 
 	/*int arr[] = {1, 2, 3, 1, 2, 3};*/
-	int arr[] = {1, 2, 3, 4, 8, 6, 10, 9, 7, 5};
+	/*int arr[] = {1, 2, 3, 4, 8, 6, 10, 9, 7, 5};*/
 	/*int arr[] = {8, 6, 34, 23, 4, 3};*/
-	int numelems = (int)( sizeof(arr) / sizeof(arr[0]) );
-	/*printf("%d", numelems);*/
+
+	int numelems = 10;
+
+	int *arr = (int *) malloc( numelems * sizeof(int) );
+
+	/*arr[0] = 0;
+	arr[1] = 1;
+	arr[2] = 2;
+	arr[3] = 3;
+	arr[4] = 4;
+	arr[5] = 5;
+	arr[6] = 6;
+	arr[7] = 7;*/
+
+	/*int numelems = (int)( sizeof(arr[]) / sizeof(arr[0]) );*/
+	printf("\n%d\n", numelems);
 
 	/* show the user the initial list */
 	printf("\nInitial list: ");
 	for (size_t i = 0; i < numelems; ++i)
 	{
+		arr[i] = i % 5;
 		printf("%d ", arr[i]);
 	}
 
 	printf("\n");
 
 	/* call merge sort on arr */
-	mergeSort(arr, numelems);
+	mergeSort(&arr, numelems);
 
 	/* check if arr is sorted */
 	printf("\n");
