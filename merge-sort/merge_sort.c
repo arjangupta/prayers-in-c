@@ -23,6 +23,9 @@ void merge (int** arrLPtr, int lenL, int** arrRPtr, int lenR)
 	printf("\n");*/
 
 	int* buffArr = (int *) malloc( (lenL + lenR) * sizeof(int) );
+
+	/* TODO: need to initialize buffArr to all zeroes */
+
 	size_t j = 0; 
 	size_t k = 0;
 	for (size_t i = 0; i < (lenL + lenR); ++i)
@@ -40,7 +43,10 @@ void merge (int** arrLPtr, int lenL, int** arrRPtr, int lenR)
 		}
 	}
 
+	/*free(arrLPtr); TODO: this is producing errors. Don't transfer ownership in main? */
+
 	*arrLPtr = buffArr;
+
 }
 
 void divide (int** arrPtr, int len)
@@ -88,6 +94,7 @@ int main()
 	printf("\n");
 
 	/* call merge sort on arr */
+	/* NOTICE: memory ownership is being transfered. */
 	mergeSort(&arr, numelems);
 
 	/* check if arr is sorted */
