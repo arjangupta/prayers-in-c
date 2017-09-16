@@ -59,9 +59,7 @@ void divide (int** arrPtr, int len)
 	printf("\n");*/
 
 	if (len == 1)
-	{
 		return;
-	}
 
 	int* leftArr = *arrPtr + len/2;
 	divide(&leftArr, (len - len/2));
@@ -83,7 +81,7 @@ int main()
 
 	printf("\nSize of array is %d\n", numelems);
 
-	/* show the user the initial list */
+	/* Show the user the initial list */
 	printf("\nInitial list: ");
 	for (size_t i = 0; i < numelems; ++i)
 	{
@@ -93,11 +91,11 @@ int main()
 
 	printf("\n");
 
-	/* call merge sort on arr */
-	/* NOTICE: memory ownership is being transfered. */
+	/* Call the merge sort algo on arr.
+	 * NOTICE: memory ownership is being transfered. */
 	mergeSort(&arr, numelems);
 
-	/* check if arr is sorted */
+	/* Check if arr is sorted */
 	printf("\n");
 	for (size_t i = 0; i < (numelems - 1); ++i)
 	{
@@ -113,7 +111,7 @@ int main()
 		}
 	}
 
-	/* show the user the resultant list */
+	/* Show the user the resultant list */
 	printf("\nFinal list: ");
 	for (size_t i = 0; i < numelems; ++i)
 	{
