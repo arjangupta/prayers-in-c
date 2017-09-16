@@ -71,17 +71,10 @@ void mergeSort (int** arrPtr, int len)
 
 int main()
 {
-	/*printf("%d", 5/2);*/
-
-	/*int arr[] = {1, 2, 3, 1, 2, 3};*/
-	/*int arr[] = {1, 2, 3, 4, 8, 6, 10, 9, 7, 5};*/
-	/*int arr[] = {8, 6, 34, 23, 4, 3};*/
-
 	int numelems = 10;
 
 	int *arr = (int *) malloc( numelems * sizeof(int) );
 
-	/*int numelems = (int)( sizeof(arr[]) / sizeof(arr[0]) );*/
 	printf("\nSize of array is %d\n", numelems);
 
 	/* show the user the initial list */
