@@ -4,109 +4,98 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 
-void merge (int *arrL, int lenL, int *arrR, int lenR)
+void merge (int** arrLPtr, int lenL, int** arrRPtr, int lenR)
 {
 	/*for (size_t i = 0; i < lenL; ++i)
 	{
-		printf("%d ", arrL[i]);
+		printf("%d ", *(*arrLPtr + i));
 	}
 
 	printf("\n");
 
 	for (size_t i = 0; i < lenR; ++i)
 	{
-		printf("%d ", arrR[i]);
+		printf("%d ", *(*arrRPtr + i));
 	}
 
 	printf("\n");*/
 
-	int buffArr[lenL + lenR];
+	int* buffArr = (int *) malloc( (lenL + lenR) * sizeof(int) );
+
+	/* TODO: need to initialize buffArr to all zeroes */
+
 	size_t j = 0; 
 	size_t k = 0;
 	for (size_t i = 0; i < (lenL + lenR); ++i)
 	{
 		if (j == lenL)
+			buffArr[i] = *(*arrRPtr + k++);
+		else if (k == lenR)
+			buffArr[i] = *(*arrLPtr + j++);
+		else 
 		{
-			buffArr[i] = arrR[k];
-			++k;
-		} else if (k == lenR) {
-			buffArr[i] = arrL[j];
-			++j;
-		} else {
-			if (arrL[j] < arrR[k])
-			{
-				buffArr[i] = arrL[j];
-				++j;
-			} else {
-				buffArr[i] = arrR[k];
-				++k;
-			}
+			if (*(*arrLPtr + j) < *(*arrRPtr + k))
+				buffArr[i] = *(*arrLPtr + j++);
+			else
+				buffArr[i] = *(*arrRPtr + k++);
 		}
 	}
 
-	/*arrL = buffArr;
-	 The above line of code didn't work, most probably because 
-	 buffArr goes out of scope at the end of this function and
-	 the fact that the pointer arrL was passed in by copy.*/
+	/*free(arrLPtr); TODO: this is producing errors. Don't transfer ownership in main? */
 
-	for (size_t i = 0; i < (lenL + lenR); ++i)
-	{
-		/* the next line of code actually 
-		changes the memory being pointed to */
-		arrL[i] = buffArr[i];
-	}
+	*arrLPtr = buffArr;
+
 }
 
-void divide (int* arr, int len)
+void divide (int** arrPtr, int len)
 {
-
 	/*for (size_t i = 0; i < len; ++i)
 	{
-		printf("%d ", arr[i]);
+		printf("%d ", *(*arrPtr + i));
 	}
 
 	printf("\n");*/
 
 	if (len == 1)
-	{
 		return;
-	}
 
-	divide(&arr[len/2], (len - len/2));
-	divide(arr, len/2);
+	int* leftArr = *arrPtr + len/2;
+	divide(&leftArr, (len - len/2));
+	divide(arrPtr, len/2);
 
-	merge(arr, len/2, &arr[len/2], (len - len/2));
+	merge(arrPtr, len/2, &leftArr, (len - len/2));
 }
 
-void mergeSort (int* arr, int len)
+void mergeSort (int** arrPtr, int len)
 {
-	divide(arr, len);
+	divide(arrPtr, len);
 }
 
 int main()
 {
-	/*printf("%d", 5/2);*/
+	int numelems = 10;
 
-	/*int arr[] = {1, 2, 3, 1, 2, 3};*/
-	int arr[] = {1, 2, 3, 4, 8, 6, 10, 9, 7, 5};
-	/*int arr[] = {8, 6, 34, 23, 4, 3};*/
-	int numelems = (int)( sizeof(arr) / sizeof(arr[0]) );
-	/*printf("%d", numelems);*/
+	int *arr = (int *) malloc( numelems * sizeof(int) );
 
-	/* show the user the initial list */
+	printf("\nSize of array is %d\n", numelems);
+
+	/* Show the user the initial list */
 	printf("\nInitial list: ");
 	for (size_t i = 0; i < numelems; ++i)
 	{
+		arr[i] = i % 3;
 		printf("%d ", arr[i]);
 	}
 
 	printf("\n");
 
-	/* call merge sort on arr */
-	mergeSort(arr, numelems);
+	/* Call the merge sort algo on arr.
+	 * NOTICE: memory ownership is being transfered. */
+	mergeSort(&arr, numelems);
 
-	/* check if arr is sorted */
+	/* Check if arr is sorted */
 	printf("\n");
 	for (size_t i = 0; i < (numelems - 1); ++i)
 	{
@@ -122,7 +111,7 @@ int main()
 		}
 	}
 
-	/* show the user the resultant list */
+	/* Show the user the resultant list */
 	printf("\nFinal list: ");
 	for (size_t i = 0; i < numelems; ++i)
 	{
