@@ -43,9 +43,9 @@ void merge (int** arrLPtr, int lenL, int** arrRPtr, int lenR)
 		}
 	}
 
-	/*free(arrLPtr); TODO: this is producing errors. Don't transfer ownership in main? */
+	*arrLPtr = buffArr; /* I want to do a memcpy instead of this, but it doesn't work. */
 
-	*arrLPtr = buffArr;
+	/* free(bufferArr); - this causes problems too */
 
 }
 
@@ -112,13 +112,15 @@ int main()
 	}
 
 	/* Show the user the resultant list */
-	printf("\nFinal list: ");
+	printf("\nFinal list:   ");
 	for (size_t i = 0; i < numelems; ++i)
 	{
 		printf("%d ", arr[i]);
 	}
 
 	printf("\n\n");
+
+	free(arr);
 	
 	return 0;
 }
