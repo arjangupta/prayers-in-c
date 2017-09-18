@@ -5,6 +5,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 void merge (int** arrLPtr, int lenL, int** arrRPtr, int lenR)
 {
@@ -43,9 +44,9 @@ void merge (int** arrLPtr, int lenL, int** arrRPtr, int lenR)
 		}
 	}
 
-	*arrLPtr = buffArr; /* I want to do a memcpy instead of this, but it doesn't work. */
+	memcpy(*arrLPtr, buffArr, (lenL + lenR) * 4); /* 1 int is 4 bytes */
 
-	/* free(bufferArr); - this causes problems too, when memcpy is used */
+	free(buffArr);
 
 }
 
@@ -75,7 +76,7 @@ void mergeSort (int** arrPtr, int len)
 
 int main()
 {
-	int numelems = 10;
+	int numelems = 100;
 
 	int *arr = (int *) malloc( numelems * sizeof(int) );
 
