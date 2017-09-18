@@ -45,7 +45,7 @@ void merge (int** arrLPtr, int lenL, int** arrRPtr, int lenR)
 
 	*arrLPtr = buffArr; /* I want to do a memcpy instead of this, but it doesn't work. */
 
-	/* free(bufferArr); - this causes problems too */
+	/* free(bufferArr); - this causes problems too, when memcpy is used */
 
 }
 
