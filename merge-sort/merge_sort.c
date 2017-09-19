@@ -25,7 +25,7 @@ void merge (int** arrLPtr, int lenL, int** arrRPtr, int lenR)
 
 	int* buffArr = (int *) malloc( (lenL + lenR) * sizeof(int) );
 
-	/* TODO: need to initialize buffArr to all zeroes */
+	memset(buffArr, 0, (lenL + lenR) * sizeof(int) );
 
 	size_t j = 0; 
 	size_t k = 0;
@@ -44,7 +44,7 @@ void merge (int** arrLPtr, int lenL, int** arrRPtr, int lenR)
 		}
 	}
 
-	memcpy(*arrLPtr, buffArr, (lenL + lenR) * 4); /* 1 int is 4 bytes */
+	memcpy(*arrLPtr, buffArr, (lenL + lenR) * sizeof(int));
 
 	free(buffArr);
 
@@ -76,9 +76,11 @@ void mergeSort (int** arrPtr, int len)
 
 int main()
 {
-	int numelems = 100;
+	int numelems = 1000;
 
 	int *arr = (int *) malloc( numelems * sizeof(int) );
+
+	memset(arr, 0, numelems * sizeof(int)); //initialize array
 
 	printf("\nSize of array is %d\n", numelems);
 
