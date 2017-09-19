@@ -30,7 +30,7 @@ int strncmp_a (const char *s1, const char *s2, size_t n)
 	return (s1[i] - s2[i]);
 }
 
-void merge (int** arrLPtr, int lenL, int** arrRPtr, int lenR)
+void merge (int** arrLPtr, size_t lenL, int** arrRPtr, size_t lenR)
 {
 	/*for (size_t i = 0; i < lenL; ++i)
 	{
@@ -73,28 +73,29 @@ void merge (int** arrLPtr, int lenL, int** arrRPtr, int lenR)
 
 }
 
-void divide (int** arrPtr, int len)
+void divide (char*** arrPtr, size_t len)
 {
-	/*for (size_t i = 0; i < len; ++i)
+	for (size_t i = 0; i < len; ++i)
 	{
-		printf("%d ", *(*arrPtr + i));
+		printf("%s ", *(*arrPtr + i) );
 	}
 
-	printf("\n");*/
-
+	printf("\n");
+	
 	if (len == 1)
 		return;
 
-	int* leftArr = *arrPtr + len/2;
+	char** leftArr = *arrPtr + len/2;
 	divide(&leftArr, (len - len/2));
 	divide(arrPtr, len/2);
 
-	merge(arrPtr, len/2, &leftArr, (len - len/2));
+	//merge(arrPtr, len/2, &leftArr, (len - len/2));
 }
 
-void mergeSort (int** arrPtr, int len)
+void mergeSort (char*** arrPtr, size_t len)
 {
-	divide(arrPtr, len);
+	//divide(arrPtr, len);
+	merge(arrPtr, len/2, &leftArr, (len - len/2));
 }
 
 int main()
@@ -126,11 +127,11 @@ int main()
 	printf("\n");
 
 	printf("\nSize of array is %zu\n", numelems);
-#if false
+
 	/* Call the merge sort algo on arr.
 	 * NOTICE: memory ownership is being transfered. */
 	mergeSort(&arr, numelems);
-
+#if false
 	/* Check if arr is sorted */
 	printf("\n");
 	for (size_t i = 0; i < (numelems - 1); ++i)
