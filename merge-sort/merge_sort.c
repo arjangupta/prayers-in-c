@@ -99,18 +99,27 @@ void mergeSort (int** arrPtr, int len)
 
 int main()
 {
-	size_t numelems = 10;
+	size_t numelems = 10; /* length of the array of char arrays */
+	size_t strLen = 7; /* length of the char arrays */
 
 	char** arr = (char **) malloc( numelems * sizeof(char*) );
 
-	memset(arr, 0, numelems * sizeof(char*)); //initialize array
+	memset(arr, 0, numelems * sizeof(char*)); /* initialize array */
 
 	/* Show the user the initial list */
 	printf("\nInitial list: ");
 	for (size_t i = 0; i < numelems; ++i)
 	{
-		*(arr + i) = (char *) malloc( 2 * sizeof(char) );
-		*(arr + i) = "X";
+		*(arr + i) = (char *) malloc( strLen * sizeof(char) );
+		for(size_t j = 0; j < strLen; ++j)
+		{
+			if (j == (strLen - 1) )
+			{
+				*(*(arr + i) + j) = '\0';
+			} else { /* 97 is 'a' in standard ASCII. */
+				*(*(arr + i) + j) = 97 + ((j + i) % strLen); 
+			}
+		}
 		printf("%s ", *(arr + i) );
 	}
 
