@@ -7,6 +7,29 @@
 #include <stdlib.h>
 #include <string.h>
 
+/* This function should work similarly to the library 
+ * function `strncmp()`. We will call it strncmp_a in order
+ * to avoid a library function redeclaration warning 
+ * from the compiler.
+ */
+int strncmp_a (const char *s1, const char *s2, size_t n)
+{
+	/* Rules of return value:
+	 * 1. If ret < 0, then s1 is smaller than s2.
+	 * 2. If ret > 0, then s2 is smaller than s1.
+	 * 3. If ret == 0, then s1 and s2 are the same size.
+	 */
+	if (n == 0)
+		return n;
+
+	size_t i = 0;
+	while (i < n && s1[i] == s2[i]) 
+	{
+		++i;
+	}
+	return (s1[i] - s2[i]);
+}
+
 void merge (int** arrLPtr, int lenL, int** arrRPtr, int lenR)
 {
 	/*for (size_t i = 0; i < lenL; ++i)
@@ -76,24 +99,25 @@ void mergeSort (int** arrPtr, int len)
 
 int main()
 {
-	int numelems = 1000;
+	size_t numelems = 10;
 
-	int *arr = (int *) malloc( numelems * sizeof(int) );
+	char** arr = (char **) malloc( numelems * sizeof(char*) );
 
-	memset(arr, 0, numelems * sizeof(int)); //initialize array
-
-	printf("\nSize of array is %d\n", numelems);
+	memset(arr, 0, numelems * sizeof(char*)); //initialize array
 
 	/* Show the user the initial list */
 	printf("\nInitial list: ");
 	for (size_t i = 0; i < numelems; ++i)
 	{
-		arr[i] = i % 3;
-		printf("%d ", arr[i]);
+		*(arr + i) = (char *) malloc( 2 * sizeof(char) );
+		*(arr + i) = "X";
+		printf("%s ", *(arr + i) );
 	}
 
 	printf("\n");
 
+	printf("\nSize of array is %zu\n", numelems);
+#if false
 	/* Call the merge sort algo on arr.
 	 * NOTICE: memory ownership is being transfered. */
 	mergeSort(&arr, numelems);
@@ -122,8 +146,14 @@ int main()
 	}
 
 	printf("\n\n");
-
+#endif
 	free(arr);
+
+	/* USE CASE 2 */
+	char* str3 = "Nice";
+	char* str4 = "COOL";
+	printf("Use case 2 return value: %d\n", strncmp_a(str3, str4, 4));
+	printf("Use case 2 return value: %d\n", strncmp(str3, str4, 4));
 	
 	return 0;
 }
