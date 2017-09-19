@@ -30,9 +30,9 @@ int strncmp_a (const char *s1, const char *s2, size_t n)
 	return (s1[i] - s2[i]);
 }
 
-void merge (int** arrLPtr, size_t lenL, int** arrRPtr, size_t lenR)
+void merge (char*** arrLPtr, size_t lenL, char*** arrRPtr, size_t lenR)
 {
-	/*for (size_t i = 0; i < lenL; ++i)
+	for (size_t i = 0; i < lenL; ++i)
 	{
 		printf("%d ", *(*arrLPtr + i));
 	}
@@ -44,9 +44,9 @@ void merge (int** arrLPtr, size_t lenL, int** arrRPtr, size_t lenR)
 		printf("%d ", *(*arrRPtr + i));
 	}
 
-	printf("\n");*/
+	printf("\n");
 
-	int* buffArr = (int *) malloc( (lenL + lenR) * sizeof(int) );
+	/*int* buffArr = (int *) malloc( (lenL + lenR) * sizeof(int) );
 
 	memset(buffArr, 0, (lenL + lenR) * sizeof(int) );
 
@@ -69,7 +69,7 @@ void merge (int** arrLPtr, size_t lenL, int** arrRPtr, size_t lenR)
 
 	memcpy(*arrLPtr, buffArr, (lenL + lenR) * sizeof(int));
 
-	free(buffArr);
+	free(buffArr);*/
 
 }
 
@@ -95,6 +95,7 @@ void divide (char*** arrPtr, size_t len)
 void mergeSort (char*** arrPtr, size_t len)
 {
 	//divide(arrPtr, len);
+	char** leftArr = *arrPtr + len/2;
 	merge(arrPtr, len/2, &leftArr, (len - len/2));
 }
 
