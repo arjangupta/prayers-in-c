@@ -1,11 +1,13 @@
 /*
  * Author: Arjan Gupta
- * Purpose: Merge Sort in C
+ * Purpose: Merge Sort in C, where the elements being sorted are character arrays of a fixed length.
  */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+const size_t strLen = 4; /* length of the strings */
 
 /* This function should work similarly to the library 
  * function `strncmp()`. We will call it strncmp_a in order
@@ -32,24 +34,26 @@ int strncmp_a (const char *s1, const char *s2, size_t n)
 
 void merge (char*** arrLPtr, size_t lenL, char*** arrRPtr, size_t lenR)
 {
+	/*printf("\n");
+
 	for (size_t i = 0; i < lenL; ++i)
 	{
-		printf("%d ", *(*arrLPtr + i));
+		printf("%s ", *(*arrLPtr + i));
 	}
 
 	printf("\n");
 
 	for (size_t i = 0; i < lenR; ++i)
 	{
-		printf("%d ", *(*arrRPtr + i));
+		printf("%s ", *(*arrRPtr + i));
 	}
 
-	printf("\n");
+	printf("\n");*/
 
-	/*int* buffArr = (int *) malloc( (lenL + lenR) * sizeof(int) );
+	char** buffArr = (char **) malloc( (lenL + lenR) * sizeof(char *) );
 
-	memset(buffArr, 0, (lenL + lenR) * sizeof(int) );
-
+	memset(buffArr, 0, (lenL + lenR) * sizeof(char *) );
+	
 	size_t j = 0; 
 	size_t k = 0;
 	for (size_t i = 0; i < (lenL + lenR); ++i)
@@ -60,27 +64,32 @@ void merge (char*** arrLPtr, size_t lenL, char*** arrRPtr, size_t lenR)
 			buffArr[i] = *(*arrLPtr + j++);
 		else 
 		{
-			if (*(*arrLPtr + j) < *(*arrRPtr + k))
+			if ( strncmp_a( ( *(*arrLPtr + j) ), ( *(*arrRPtr + k) ), strLen) < 0 ) 
 				buffArr[i] = *(*arrLPtr + j++);
 			else
 				buffArr[i] = *(*arrRPtr + k++);
 		}
 	}
 
-	memcpy(*arrLPtr, buffArr, (lenL + lenR) * sizeof(int));
+	/*for (size_t i = 0; i < (lenL + lenR); ++i)
+	{
+		printf("%s ", *(buffArr + i) );
+	}*/
 
-	free(buffArr);*/
+	memcpy(*arrLPtr, buffArr, (lenL + lenR) * sizeof(char *));
+
+	free(buffArr);
 
 }
 
 void divide (char*** arrPtr, size_t len)
 {
-	for (size_t i = 0; i < len; ++i)
+	/*for (size_t i = 0; i < len; ++i)
 	{
 		printf("%s ", *(*arrPtr + i) );
 	}
 
-	printf("\n");
+	printf("\n");*/
 	
 	if (len == 1)
 		return;
@@ -89,20 +98,20 @@ void divide (char*** arrPtr, size_t len)
 	divide(&leftArr, (len - len/2));
 	divide(arrPtr, len/2);
 
-	//merge(arrPtr, len/2, &leftArr, (len - len/2));
+	merge(arrPtr, len/2, &leftArr, (len - len/2));
 }
 
 void mergeSort (char*** arrPtr, size_t len)
 {
-	//divide(arrPtr, len);
-	char** leftArr = *arrPtr + len/2;
-	merge(arrPtr, len/2, &leftArr, (len - len/2));
+	divide(arrPtr, len);
 }
 
 int main()
 {
-	size_t numelems = 10; /* length of the array of char arrays */
-	size_t strLen = 7; /* length of the char arrays */
+	/* Length of the array of strings.
+	 * Must be larger than strLen to produce an unsorted array. 
+	 */
+	size_t numelems = strLen * 3; 
 
 	char** arr = (char **) malloc( numelems * sizeof(char*) );
 
@@ -116,11 +125,9 @@ int main()
 		for(size_t j = 0; j < strLen; ++j)
 		{
 			if (j == (strLen - 1) )
-			{
 				*(*(arr + i) + j) = '\0';
-			} else { /* 97 is 'a' in standard ASCII. */
-				*(*(arr + i) + j) = 97 + ((j + i) % strLen); 
-			}
+			else /* 97 is 'a' in standard ASCII. */
+				*(*(arr + i) + j) = 97 + ( (j + i) % strLen ); 
 		}
 		printf("%s ", *(arr + i) );
 	}
@@ -132,39 +139,28 @@ int main()
 	/* Call the merge sort algo on arr.
 	 * NOTICE: memory ownership is being transfered. */
 	mergeSort(&arr, numelems);
-#if false
+
 	/* Check if arr is sorted */
 	printf("\n");
 	for (size_t i = 0; i < (numelems - 1); ++i)
 	{
-		if (arr[i] > arr[i + 1])
+		if ( strncmp_a( ( *(arr + i) ), ( *(arr + i + 1) ), strLen ) > 0 )
 		{
 			printf("Array is unsorted.\n");
 			break;
 		}
-
 		if (i == (numelems - 2) )
-		{
 			printf("Array is sorted.\n");
-		}
 	}
 
 	/* Show the user the resultant list */
 	printf("\nFinal list:   ");
 	for (size_t i = 0; i < numelems; ++i)
-	{
-		printf("%d ", arr[i]);
-	}
+		printf("%s ", *(arr + i) );
 
 	printf("\n\n");
-#endif
-	free(arr);
 
-	/* USE CASE 2 */
-	char* str3 = "Nice";
-	char* str4 = "COOL";
-	printf("Use case 2 return value: %d\n", strncmp_a(str3, str4, 4));
-	printf("Use case 2 return value: %d\n", strncmp(str3, str4, 4));
+	free(arr);
 	
 	return 0;
 }
