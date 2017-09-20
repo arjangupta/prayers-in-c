@@ -55,7 +55,7 @@ int main ()
 	printf("Use case 3 return value: %d\n", strncmp_a(str5, str6, 5));
 	printf("Use case 3 return value: %d\n", strncmp_a(str5, str6, 5));
 
-	/* USE CASE 4 */
+	/* USE CASE 4 - DOESN'T WORK */ 
 	char str7[] = "ha";
 	char str8[] = "ha";
 	printf("Use case 4 return value: %d\n", strncmp_a(str7, str8, 4));
