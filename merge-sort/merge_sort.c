@@ -79,7 +79,6 @@ void merge (char*** arrLPtr, size_t lenL, char*** arrRPtr, size_t lenR)
 	memcpy(*arrLPtr, buffArr, (lenL + lenR) * sizeof(char *));
 
 	free(buffArr);
-
 }
 
 void divide (char*** arrPtr, size_t len)
@@ -136,8 +135,7 @@ int main()
 
 	printf("\nSize of array is %zu\n", numelems);
 
-	/* Call the merge sort algo on arr.
-	 * NOTICE: memory ownership is being transfered. */
+	/* Call the merge sort algo on arr.*/
 	mergeSort(&arr, numelems);
 
 	/* Check if arr is sorted */
