@@ -23,9 +23,8 @@ int strncmp_a (const char *s1, const char *s2, size_t n)
 
 	size_t i = 0;
 	while (i < n && s1[i] == s2[i]) 
-	{
 		++i;
-	}
+
 	return (s1[i] - s2[i]);
 }
 
@@ -56,11 +55,11 @@ int main ()
 	printf("Use case 3 return value: %d\n", strncmp_a(str5, str6, 5));
 	printf("Use case 3 return value: %d\n", strncmp_a(str5, str6, 5));
 
-	/* USE CASE 4 */
+	/* USE CASE 4 - DOESN'T WORK */ 
 	char str7[] = "ha";
-	char str8[] = "ah";
-	printf("Use case 4 return value: %d\n", strncmp_a(str7, str8, 2));
-	printf("Use case 4 return value: %d\n", strncmp(str7, str8, 2));
+	char str8[] = "ha";
+	printf("Use case 4 return value: %d\n", strncmp_a(str7, str8, 4));
+	printf("Use case 4 return value: %d\n", strncmp(str7, str8, 4));
 
 	return 0;
 }

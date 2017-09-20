@@ -34,22 +34,6 @@ int strncmp_a (const char *s1, const char *s2, size_t n)
 
 void merge (char*** arrLPtr, size_t lenL, char*** arrRPtr, size_t lenR)
 {
-	/*printf("\n");
-
-	for (size_t i = 0; i < lenL; ++i)
-	{
-		printf("%s ", *(*arrLPtr + i));
-	}
-
-	printf("\n");
-
-	for (size_t i = 0; i < lenR; ++i)
-	{
-		printf("%s ", *(*arrRPtr + i));
-	}
-
-	printf("\n");*/
-
 	char** buffArr = (char **) malloc( (lenL + lenR) * sizeof(char *) );
 
 	memset(buffArr, 0, (lenL + lenR) * sizeof(char *) );
@@ -71,25 +55,13 @@ void merge (char*** arrLPtr, size_t lenL, char*** arrRPtr, size_t lenR)
 		}
 	}
 
-	/*for (size_t i = 0; i < (lenL + lenR); ++i)
-	{
-		printf("%s ", *(buffArr + i) );
-	}*/
-
 	memcpy(*arrLPtr, buffArr, (lenL + lenR) * sizeof(char *));
 
 	free(buffArr);
 }
 
 void divide (char*** arrPtr, size_t len)
-{
-	/*for (size_t i = 0; i < len; ++i)
-	{
-		printf("%s ", *(*arrPtr + i) );
-	}
-
-	printf("\n");*/
-	
+{	
 	if (len == 1)
 		return;
 
@@ -135,7 +107,7 @@ int main()
 
 	printf("\nSize of array is %zu\n", numelems);
 
-	/* Call the merge sort algo on arr.*/
+	/* Call the merge sort algo on arr. */
 	mergeSort(&arr, numelems);
 
 	/* Check if arr is sorted */
