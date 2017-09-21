@@ -63,5 +63,9 @@ int main ()
 
 	/* TODO: account for case where there is no null termination */
 
+	/* TODO: See GNU CC libs */
+
+	/* TODO: find a truth-table method to account for all use cases in this program. */
+
 	return 0;
 }
