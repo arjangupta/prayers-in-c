@@ -5,6 +5,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 /* This function should work similarly to the library 
  * function `strncmp()`. We will call it strncmp_a in order
@@ -34,7 +35,8 @@ int main ()
 	 * 1. n is 0.
 	 * 2. str1 is larger than str2.
 	 * 3. str2 is larger than str1.
-	 * 4. str1 is the same size as str2. 
+	 * 4. str1 is the same size as str2.
+	 *	4a. str1 is the same size as str2 but has no null-termination. 
 	 */
 
 	/* USE CASE 1 */
@@ -43,11 +45,15 @@ int main ()
 	printf("Use case 1 return value: %d\n", strncmp_a(str1, str2, 0));
 	printf("Use case 1 return value: %d\n", strncmp(str1, str2, 0));
 
+	printf("\n");
+
 	/* USE CASE 2 */
 	char str3[] = "Nice";
 	char str4[] = "COOL";
 	printf("Use case 2 return value: %d\n", strncmp_a(str3, str4, 4));
 	printf("Use case 2 return value: %d\n", strncmp(str3, str4, 4));
+
+	printf("\n");
 
 	/* USE CASE 3 */
 	char str5[] = "Hell";
@@ -55,11 +61,24 @@ int main ()
 	printf("Use case 3 return value: %d\n", strncmp_a(str5, str6, 5));
 	printf("Use case 3 return value: %d\n", strncmp_a(str5, str6, 5));
 
+	printf("\n");
+
 	/* USE CASE 4 */ 
 	char str7[] = "ha";
 	char str8[] = "ha";
 	printf("Use case 4 return value: %d\n", strncmp_a(str7, str8, 4));
 	printf("Use case 4 return value: %d\n", strncmp(str7, str8, 4));
+
+	printf("\n");
+
+	/* USE CASE 5 */
+	char* str10 = (char *) malloc (1 * sizeof(char) );
+	*str10 = 'a';
+	char str11[] = "a";
+	printf("Use case 5 return value: %d\n", strncmp_a(str10, str11, 5) );
+	printf("Use case 5 return value: %d\n", strncmp(str10, str11, 5));
+
+	printf("\n");
 
 	/* TODO: account for case where there is no null termination */
 
