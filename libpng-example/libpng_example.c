@@ -165,8 +165,10 @@ void process_file(void)
                                x, y, ptr[0], ptr[1], ptr[2], ptr[3]);
 
                         /* set red value to 0 and green value to the blue one */
-                        ptr[0] = 0;
-                        ptr[1] = ptr[2];
+                        //ptr[0] = 0;
+                        //ptr[1] = ptr[2];
+                        //do something funky with the green ptr
+                        ptr[2] = 200;
                 }
         }
 }
