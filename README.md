@@ -1,2 +1,2 @@
 # C Practice Programs
-This repo contains a collection of C programs I've written in order to get better at the language.
+This repo contains a collection of C programs I've written to either get better at specific concepts or at the language itself.
