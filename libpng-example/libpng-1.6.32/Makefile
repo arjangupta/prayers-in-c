@@ -1,0 +1,22 @@
+PROJ=libpng.so
+
+NDK_PLATFORM=/Users/matt.scarpino/Library/Android/sdk/ndk-bundle/platforms/android-23/arch-arm
+
+CC=arm-linux-androideabi-gcc
+
+CFLAGS=-std=c99 -Wall -shared -fPIC -Os --sysroot=$(NDK_PLATFORM)
+
+INC_DIRS=$(NDK_PLATFORM)/usr/include
+
+LIB_DIRS=$(NDK_PLATFORM)/usr/lib
+
+LIBS=-lm -lz
+
+$(PROJ): png.c pngerror.c pngget.c pngmem.c pngpread.c pngread.c pngrio.c pngrtran.c pngrutil.c pngset.c pngtest.c pngtrans.c pngwio.c pngwrite.c pngwtran.c pngwutil.c
+	$(CC) $(CFLAGS) -o $@ $^ $(INC_DIRS:%=-I%) $(LIB_DIRS:%=-L%) $(LIBS)
+	cp $(PROJ) /Users/matt.scarpino/PNGTest/app/src/main/jniLibs/armeabi-v7a
+
+.PHONY: clean
+
+clean:
+	rm $(PROJ)
