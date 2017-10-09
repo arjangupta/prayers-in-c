@@ -1,4 +1,6 @@
-makePNG: pngexample2.c
-	gcc -o makePNG pngexample2.c
+PROJ=makePNG
+
+$(PROJ): pngexample2.c
+	gcc -Wall -std=c99 -o $@ pngexample2.c -lpng
 clean:
-	rm makePNG
+	rm $(PROJ) output.png

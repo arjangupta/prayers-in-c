@@ -1,11 +1,15 @@
-#include "../libpng-1.6.32/png.h"
+//#include "../libpng-1.6.32/png.h"
+
+#include <png.h>
+
 #include <stdint.h>
 #include <stdio.h>
 
 enum return_code
 {
+	FILE_OPEN_FAILED = -100
 
-}
+};
 
 int write_png(uint32_t rows, uint32_t cols, float *buffer)
 {
@@ -21,6 +25,9 @@ int write_png(uint32_t rows, uint32_t cols, float *buffer)
 	{
 		return FILE_OPEN_FAILED;
 	}
+
+	//Initialize the png structure
+
 
 	return 100; //still implementing
 }
