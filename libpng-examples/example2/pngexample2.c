@@ -114,12 +114,18 @@ return_code static inline write_png(uint32_t rows, uint32_t cols, float *buff)
 int main()
 {
 	return_code ret = -1000;
-	float *buff = (float*) malloc (2000 * sizeof(float) );
-	for(size_t i = 0; i < 200; ++i)
+	//Decide the dimensions of the image
+	uint32_t height = 768; //rows
+	uint32_t width = 1024; //columns
+	float *buff = (float*) malloc (height * width * sizeof(float) );
+
+	//Set values in the buffer
+	for(size_t i = 0; i < height * width * sizeof(float); ++i)
 	{
 		buff[i] = (i + 300) / 1000;
 	}
-	if( (ret =  write_png(1000, 1000, buff)) == 0 )
+
+	if( (ret =  write_png(height, width, buff)) == 0 )
 	{
 		printf("Example succeeded!\n");
 	} else {
