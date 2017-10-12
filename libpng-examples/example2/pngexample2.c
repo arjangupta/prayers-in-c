@@ -13,16 +13,17 @@ typedef enum rc
 
 void static inline set_RGB(png_bytep row_ptr, float buff_val)
 {
-	int32_t val = (int32_t) (buff_val * 767);
+	const int threshold = 768;
+	int32_t val = (int32_t) (buff_val * threshold);
 	if (val < 0) val = 0;
-	if (val > 767) val = 767;
+	if (val > threshold) val = threshold;
 	int32_t offset = val % 256;
 
 	if (val < 256)
 	{
-		row_ptr[0] = 0; 
-		row_ptr[1] = 0; 
-		row_ptr[2] = offset;
+		row_ptr[0] = 0; //red 
+		row_ptr[1] = 0; //green
+		row_ptr[2] = offset; //blue
 	}
 	else if (val < 512)
 	{
@@ -119,11 +120,21 @@ int main()
 	uint32_t width = 1024; //columns
 	float *buff = (float*) malloc (height * width * sizeof(float) );
 
-	//Set values in the buffer
-	for(size_t i = 0; i < height * width * sizeof(float); ++i)
+	if (buff == NULL)
 	{
-		buff[i] = (i + 300) / 1000;
+		printf("buff is NULL. Exiting.\n");
+		return 1;
 	}
+
+	//Set values in the buffer
+	for(size_t i = 0; i < (height * width); ++i)
+	{
+		buff[i] = i;
+		while (buff[i] > 1)
+			buff[i] /= 10;
+	}
+
+	printf("debug1\n");
 
 	if( (ret =  write_png(height, width, buff)) == 0 )
 	{
