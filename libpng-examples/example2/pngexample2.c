@@ -21,19 +21,19 @@ void static inline set_RGB(png_bytep row_ptr, float buff_val)
 
 	if (val < 256)
 	{
-		row_ptr[0] = 0; //red 
+		row_ptr[0] = 255; //red 
 		row_ptr[1] = 0; //green
 		row_ptr[2] = offset; //blue
 	}
 	else if (val < 512)
 	{
 		row_ptr[0] = 0; 
-		row_ptr[1] = offset; 
-		row_ptr[2] = 255 - offset;
+		row_ptr[1] = 255 - offset; 
+		row_ptr[2] = offset;
 	}
 	else
 	{
-		row_ptr[0] = offset;
+		row_ptr[0] = offset - 100;
 		row_ptr[1] = 255 - offset;
 		row_ptr[2] = 0;
 	}
@@ -133,8 +133,6 @@ int main()
 		while (buff[i] > 1)
 			buff[i] /= 10;
 	}
-
-	printf("debug1\n");
 
 	if( (ret =  write_png(height, width, buff)) == 0 )
 	{
