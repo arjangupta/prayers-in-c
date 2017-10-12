@@ -52,7 +52,7 @@ return_code static inline write_png(uint32_t rows, uint32_t cols, float *buff)
 	fp = fopen("output.png", "wb");
 	if (fp == NULL)
 	{
-		ret = FILE_OPEN_FAILED; //CHANGE ALL RETURNS TO SETTING RET
+		ret = FILE_OPEN_FAILED;
 		goto conclude;
 	}
 
