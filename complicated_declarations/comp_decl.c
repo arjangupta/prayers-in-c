@@ -2,10 +2,12 @@
  * This program goes over some complex declarations in C
  */
 
-#include <stdlib.h>
-
 int main()
 {
-  void (* (*f[5])() ) ();
+  /* TODO: Write an explanation for this and
+   * 	   then write the same line of code with
+   *	   typedefs for better readability.
+   */ 
+  void (* ( *f [5] ) (void) ) (void);
   return 0;
 }
