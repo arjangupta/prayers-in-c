@@ -7,8 +7,14 @@
 #include <stdlib.h>
 #include <string.h>
 
+// Global
+static char* global_stCharr;
+
 void example()
 {
+	// Initialize global
+	global_stCharr = "HelloGlobal";
+
 	/* declare a static var */
 	static char* stChArr = "Hello";
 
@@ -17,15 +23,18 @@ void example()
 
 	printf("\n");
 
-	printf("The static character array is: %s\n", stChArr);
+	printf("The global static character array is: %s\n", global_stCharr);
+	printf("The local static character array is: %s\n", stChArr);
 	printf("The plain character array is: %s\n", plainChArr);
 
 	printf("\nReset the pointer locations.\n\n");
 
-	stChArr = stChArr + 1;
-	plainChArr = plainChArr + 1;
+	++global_stCharr;
+	++stChArr;
+	++plainChArr;
 
-	printf("The static character array is: %s\n", stChArr);
+	printf("The global static character array is: %s\n", global_stCharr);
+	printf("The local static character array is: %s\n", stChArr);
 	printf("The plain character array is: %s\n", plainChArr);
 }
 
