@@ -46,14 +46,14 @@ void bubble_sort(int* array, int length)
 
 int main()
 {
-    printf("Unnamed sort:\n");
+    printf("Unnamed sort (bubble sort variation?):\n");
     const int size_of_array = 10;
     int my_array[10] = {9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
     print_array(my_array, size_of_array);
     unnamed_sort(my_array, size_of_array);
     print_array(my_array, size_of_array);
 
-    printf("Bubble sort:\n");
+    printf("Standard bubble sort:\n");
 
     int my_second_array[10] = {9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
     print_array(my_second_array, size_of_array);
