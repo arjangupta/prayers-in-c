@@ -27,15 +27,38 @@ void unnamed_sort(int* array, int length)
     }
 }
 
+void bubble_sort(int* array, int length)
+{
+    int i, j, temp;
+    for (i = 0; i < length; i++)
+    {
+        for (j = 0; j < length - 1; j++)
+        {
+            if (array[j] > array[j+1])
+            {
+                temp = array[j];
+                array[j] = array[j+1];
+                array[j+1] = temp;
+            }
+        }
+    }
+}
+
 int main()
 {
+    printf("Unnamed sort:\n");
     const int size_of_array = 10;
     int my_array[10] = {9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
     print_array(my_array, size_of_array);
     unnamed_sort(my_array, size_of_array);
     print_array(my_array, size_of_array);
 
-    // int my_array2[10] = {9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
+    printf("Bubble sort:\n");
+
+    int my_second_array[10] = {9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
+    print_array(my_second_array, size_of_array);
+    bubble_sort(my_second_array, size_of_array);
+    print_array(my_second_array, size_of_array);
 
     return 0;
 }
